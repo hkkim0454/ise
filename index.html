@@ -257,6 +257,8 @@
   .venue .halls rect.h3 { fill: color-mix(in oklch, var(--accent) 10%, transparent); }
   .venue .halls text { fill: var(--sub); font-size: 15px; font-weight: 700; text-anchor: middle; }
   .venue .halls text.aisle { font-size: 11px; font-weight: 600; }
+  .venue .halls rect.ghost { fill: none; stroke-dasharray: 4 4; }
+  .venue .access text.north { font-size: 13px; }
   .venue .access text { fill: var(--sub); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-anchor: middle; }
   .venue .route polyline { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 6 5; stroke-linecap: round; stroke-linejoin: round; }
   .venue .arrhead { fill: var(--accent); }
@@ -321,7 +323,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.22 23:04</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.22 23:09</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -439,7 +441,7 @@
 
   <section id="plan">
     <div class="sec-head"><span class="badge">6</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
-    <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 전시장 그림은 개략도이고, 홀 안 위치는 부스 번호로 추정했습니다. 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
+    <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 전시장 그림은 공식 평면도 캡처를 바탕으로 단순화했고(위쪽이 북쪽), 홀 안 위치는 부스 번호로 추정했습니다. 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
     <div class="glass plan-card">
       <div class="seg plan-seg" role="group" aria-label="관람일 선택">
         <button type="button" data-day="0" aria-pressed="true">화 2/2</button>
@@ -452,20 +454,22 @@
           <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrhead"/></marker>
         </defs>
         <g class="halls">
-          <rect data-hall="1" x="20" y="40" width="72" height="100" rx="10"/><text x="56" y="94">Hall 1</text>
-          <rect data-hall="2" x="20" y="150" width="72" height="120" rx="10"/><text x="56" y="214">Hall 2</text>
-          <rect data-hall="3" x="108" y="20" width="96" height="262" rx="10"/><text x="156" y="176">Hall 3</text>
-          <rect data-hall="5" x="220" y="20" width="150" height="118" rx="10"/><text x="295" y="84">Hall 5</text>
-          <rect data-hall="7" x="384" y="20" width="122" height="118" rx="10"/><text x="445" y="76">Hall 7</text><text x="445" y="96">오디오</text>
-          <rect data-hall="4" x="220" y="164" width="150" height="118" rx="10"/><text x="295" y="226">Hall 4</text><text x="295" y="246">사이니지/방송</text>
-          <rect data-hall="6" x="384" y="164" width="122" height="118" rx="10"/><text x="445" y="220">Hall 6</text><text x="445" y="240">조명/무대</text>
-          <rect data-hall="8.0" x="522" y="96" width="62" height="80" rx="10"/><text x="553" y="134">8.0</text><text x="553" y="152">데모룸</text>
-          <text x="370" y="155" class="aisle">가로 통로 · Congress Square</text>
+          <rect x="8" y="146" width="92" height="154" rx="8" class="ghost"/><text x="54" y="228">1.0</text>
+          <rect data-hall="1" x="103" y="45" width="60" height="100" rx="8"/><text x="133" y="99">Hall 1</text>
+          <rect data-hall="2" x="108" y="151" width="58" height="92" rx="8"/><text x="137" y="201">Hall 2</text>
+          <rect data-hall="3" x="180" y="14" width="80" height="288" rx="8"/><text x="220" y="176">Hall 3</text>
+          <rect data-hall="5" x="276" y="12" width="72" height="128" rx="8"/><text x="312" y="80">Hall 5</text>
+          <rect data-hall="7" x="356" y="12" width="72" height="128" rx="8"/><text x="392" y="72">Hall 7</text><text x="392" y="92">오디오</text>
+          <rect data-hall="4" x="276" y="166" width="72" height="136" rx="8"/><text x="312" y="226">Hall 4</text><text x="312" y="246">사이니지</text>
+          <rect data-hall="6" x="356" y="166" width="72" height="136" rx="8"/><text x="392" y="226">Hall 6</text><text x="392" y="246">조명/무대</text>
+          <rect data-hall="8.0" x="448" y="208" width="118" height="78" rx="8"/><text x="507" y="244">Hall 8.0</text><text x="507" y="262">데모룸</text>
+          <text x="352" y="157" class="aisle">Congress Square</text>
         </g>
         <g class="access">
-          <text x="6" y="210" transform="rotate(-90 6 210)">SOUTH ACCESS</text>
-          <text x="156" y="304">EAST ACCESS</text>
-          <text x="553" y="194">NORTH ACCESS</text>
+          <text x="66" y="30">SOUTH ACCESS</text>
+          <text x="220" y="316">EAST ACCESS</text>
+          <text x="507" y="304">NORTH ACCESS</text>
+          <text x="560" y="40" class="north">N ↑</text>
         </g>
         <g id="campus-route"></g>
       </svg>
@@ -742,12 +746,12 @@
     Array.prototype.forEach.call(document.querySelectorAll("#campus rect[data-hall]"), function (r) {
       r.classList.toggle("on", order.indexOf(r.getAttribute("data-hall")) >= 0);
     });
-    var pts = [day.start === "south" ? [14, 210] : [156, 292]];
+    var pts = [day.start === "south" ? [66, 36] : [220, 306]];
     order.forEach(function (h) { var r = rectOf(h); pts.push([r.x + r.w / 2, r.y + r.h / 2 - (h === "3" ? 40 : 0)]); });
     g.appendChild(el("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), "marker-end": "url(#arr)", "class": "hall-line" }));
-    order.forEach(function (h, i) { var p = pts[i + 1];
-      var pin = el("g", { "class": "pin" }); pin.appendChild(el("circle", { cx: p[0], cy: p[1] - 22, r: 11 }));
-      pin.appendChild(el("text", { x: p[0], y: p[1] - 18 }, String(i + 1))); g.appendChild(pin); });
+    order.forEach(function (h, i) { var r = rectOf(h), cx = r.x + r.w - 13, cy = r.y + 14;
+      var pin = el("g", { "class": "pin" }); pin.appendChild(el("circle", { cx: cx, cy: cy, r: 11 }));
+      pin.appendChild(el("text", { x: cx, y: cy + 4 }, String(i + 1))); g.appendChild(pin); });
   }
 
   // 홀 상세 그림: 열(알파벳)은 세로, 부스 번호는 가로. Hall 3은 아래쪽이 입구(EAST ACCESS).
