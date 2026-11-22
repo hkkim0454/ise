@@ -249,6 +249,62 @@
   .tabbar button { height: 44px; padding: 0 15px; border: 0; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer; background: transparent; color: var(--ink); transition: background .2s, color .2s; }
   .tabbar button.on { background: var(--accent); color: #fff; }
 
+  /* 관람 플랜 */
+  .plan-card { padding: 8px 8px 16px; }
+  .plan-seg { grid-template-columns: repeat(3, 1fr); }
+  .venue { display: block; width: 100%; max-width: 760px; height: auto; margin: 6px auto 4px; }
+  .venue .halls rect { fill: var(--fill); stroke: var(--sep2); stroke-width: 1; }
+  .venue .halls rect.h3 { fill: color-mix(in oklch, var(--accent) 10%, transparent); }
+  .venue .halls text { fill: var(--sub); font-size: 15px; font-weight: 700; text-anchor: middle; }
+  .venue .halls text.aisle { font-size: 11px; font-weight: 600; }
+  .venue .halls rect.ghost { fill: none; stroke-dasharray: 4 4; }
+  .venue .access text.north { font-size: 13px; }
+  .venue .access text { fill: var(--sub); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-anchor: middle; }
+  .venue .route polyline { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 6 5; stroke-linecap: round; stroke-linejoin: round; }
+  .venue .arrhead { fill: var(--accent); }
+  .venue .pin circle { fill: var(--accent); stroke: #fff; stroke-width: 2; }
+  .venue .pin.soft circle { fill: var(--seg); stroke: var(--accent); }
+  .venue .pin text { fill: #fff; font-size: 13px; font-weight: 700; text-anchor: middle; }
+  .venue .pin.soft text { fill: var(--accent); }
+  .day { padding: 4px 14px 0; }
+  .day-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; padding: 8px 0 6px; }
+  .day-head b { font-size: 17px; }
+  .day-head span { font-size: 13px; color: var(--sub); }
+  .stops { list-style: none; margin: 0; padding: 0; }
+  .stops li { display: flex; align-items: center; gap: 12px; padding: 11px 0; font-size: 16px; }
+  .stops li + li { border-top: 1px solid var(--sep); }
+  .stops .n { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+  .stops .n.soft { background: color-mix(in oklch, var(--accent) 14%, transparent); color: var(--accent); }
+  .stops .nm { flex: 1; min-width: 0; }
+  .stops .bt { flex: none; padding: 4px 10px; border-radius: 10px; background: color-mix(in oklch, var(--accent) 14%, transparent); color: var(--accent); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .day-note { margin: 8px 0 0; font-size: 14px; color: var(--sub); line-height: 1.55; }
+  .venue .halls rect.on { fill: color-mix(in oklch, var(--accent) 16%, transparent); stroke: var(--accent); }
+  .venue .hall-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 6 5; stroke-linecap: round; stroke-linejoin: round; }
+  .day-note.top { margin: 0 0 6px; }
+  .hall-block { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--sep); }
+  .hall-title { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .hallmap { display: block; width: 100%; height: auto; margin: 0 auto 6px; }
+  .hallmap .pin.est circle { stroke-dasharray: 3 3; }
+  .est-tag { font-style: normal; font-size: 11px; font-weight: 700; color: var(--sub); background: var(--fill); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
+  @media (min-width: 1024px) { .hall-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 24px; align-items: start; } }
+
+  .hallmap .hm-bg { fill: var(--fill); stroke: var(--sep2); }
+  .hallmap .hm-row { stroke: var(--sep); stroke-width: 1; }
+  .hallmap .hm-lab { fill: var(--sub); font-size: 15px; font-weight: 700; text-anchor: middle; }
+  .hallmap .hm-cap { fill: var(--sub); font-size: 14px; font-weight: 700; text-anchor: middle; }
+  .hallmap .hm-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 5 5; opacity: .7; }
+  .hallmap .pin circle { fill: var(--seg); stroke: var(--accent); stroke-width: 2; }
+  .hallmap .pin text { fill: var(--accent); font-size: 14px; font-weight: 700; text-anchor: middle; }
+  .hallmap .pin.key circle { fill: var(--accent); stroke: #fff; }
+  .hallmap .pin.key text { fill: #fff; }
+  .key-tag { font-style: normal; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
+  .stops li { padding: 9px 0; font-size: 15px; }
+  .plan-lock { display: flex; flex-direction: column; gap: 12px; }
+  .lock-row { display: flex; gap: 8px; }
+  .lock-row input { flex: 1; min-width: 0; height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--sep2); background: var(--fill); color: var(--ink); font: inherit; font-size: 16px; }
+  .lock-row input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lock-row .copy-btn { height: 44px; padding: 0 20px; }
+  .lock-msg { margin: 0; min-height: 1em; font-size: 14px; color: oklch(0.55 0.19 25); }
   /* PC 타일 배치: 모바일에서는 묶음 상자가 없는 것처럼 동작 */
   .duo, .col { display: contents; }
   #s9 { order: 1; }
@@ -277,7 +333,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.22 22:37</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.22 23:30</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -393,10 +449,56 @@
     </div>
   </div>
 
+  <section id="plan">
+    <div class="sec-head"><span class="badge">6</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
+    <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 모든 그림은 위쪽이 북쪽이며, 부스 위치는 공식 평면도에서 읽은 값입니다(점선 원은 위치 추정). 행사 직전에 부스가 바뀔 수 있으니 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
+    <div class="glass plan-lock" id="plan-lock">
+      <p class="body16">관람 플랜은 아직 준비 중입니다. 비밀번호를 넣으면 볼 수 있습니다.</p>
+      <form class="lock-row" id="plan-lock-form" autocomplete="off">
+        <input type="password" id="plan-pw" placeholder="비밀번호" aria-label="관람 플랜 비밀번호">
+        <button type="submit" class="copy-btn">열기</button>
+      </form>
+      <p class="lock-msg" id="plan-msg" role="status" aria-live="polite"></p>
+    </div>
+    <div class="glass plan-card" id="plan-card" hidden>
+      <div class="seg plan-seg" role="group" aria-label="관람일 선택">
+        <button type="button" data-day="0" aria-pressed="true">화 2/2</button>
+        <button type="button" data-day="1" aria-pressed="false">수 2/3</button>
+        <button type="button" data-day="2" aria-pressed="false">목 2/4</button>
+      </div>
+
+      <svg class="venue" id="campus" viewBox="0 0 600 320" role="img" aria-label="ISE 전시장 개략도와 그날의 홀 이동 순서">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrhead"/></marker>
+        </defs>
+        <g class="halls">
+          <rect data-hall="1" x="30" y="143" width="95" height="125" rx="8"/><text x="77" y="210">Hall 1</text>
+          <rect data-hall="2" x="129" y="40" width="63" height="206" rx="8"/><text x="160" y="146">Hall 2</text>
+          <rect data-hall="3" x="207" y="8" width="73" height="300" rx="8"/><text x="243" y="176">Hall 3</text>
+          <rect data-hall="5" x="300" y="8" width="65" height="130" rx="8"/><text x="332" y="78">Hall 5</text>
+          <rect data-hall="7" x="377" y="8" width="68" height="130" rx="8"/><text x="411" y="70">Hall 7</text><text x="411" y="90">오디오</text>
+          <rect data-hall="4" x="300" y="164" width="65" height="143" rx="8"/><text x="332" y="230">Hall 4</text><text x="332" y="250">사이니지</text>
+          <rect data-hall="6" x="377" y="164" width="68" height="143" rx="8"/><text x="411" y="230">Hall 6</text><text x="411" y="250">조명/무대</text>
+          <rect data-hall="8.0" x="468" y="214" width="110" height="60" rx="8"/><text x="523" y="240">Hall 8.0</text><text x="523" y="258">데모룸</text>
+          <text x="372" y="155" class="aisle">Congress Square</text>
+        </g>
+        <g class="access">
+          <text x="66" y="80">SOUTH ACCESS</text>
+          <text x="243" y="318">EAST ACCESS</text>
+          <text x="523" y="292">NORTH ACCESS</text>
+          <text x="568" y="30" class="north">N ↑</text>
+        </g>
+        <g id="campus-route"></g>
+      </svg>
+
+      <div id="day-body"></div>
+    </div>
+  </section>
+
   <div class="duo duo-b">
     <div class="col">
   <section id="s7">
-    <div class="sec-head"><span class="badge">6</span><h2>ISE 방문객 혜택</h2></div>
+    <div class="sec-head"><span class="badge">7</span><h2>ISE 방문객 혜택</h2></div>
     <p class="sec-note">ISE 2027 공식 사이트 기준 정리입니다.</p>
     <div class="glass acc-card">
 
@@ -483,7 +585,7 @@
   </section>
 
   <section id="s9">
-    <div class="sec-head"><span class="badge">8</span><h2>맛집 · 마트 정보</h2></div>
+    <div class="sec-head"><span class="badge">9</span><h2>맛집 · 마트 정보</h2></div>
     <div class="glass stack">
       <p class="body16">예전에 조사해 둔 식당, 조식 카페, 마트 목록입니다. 아래 버튼을 누르면 정리된 시트가 열립니다.</p>
       <a class="btn-primary" href="https://docs.google.com/spreadsheets/d/1EPRS0VilmaA5YN7fO8BL1LG3VoPO5Bql/edit?usp=sharing&amp;ouid=102212323522439915159&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">맛집 · 마트 목록 보기</a>
@@ -491,7 +593,7 @@
   </section>
     </div>
   <section id="s8">
-    <div class="sec-head"><span class="badge">7</span><h2>주의 사항</h2></div>
+    <div class="sec-head"><span class="badge">8</span><h2>주의 사항</h2></div>
 
     <div class="glass">
       <div class="ck-head"><h3>개인 준비물</h3><span class="ck-count num" id="ck-count">0 / 0</span></div>
@@ -556,6 +658,7 @@
   <button type="button" data-target="s1" class="on">항공</button>
   <button type="button" data-target="s3">숙소</button>
   <button type="button" data-target="s4">등록</button>
+  <button type="button" data-target="plan">플랜</button>
   <button type="button" data-target="s7">혜택</button>
   <button type="button" data-target="s8">준비물</button>
 </nav>
@@ -611,6 +714,152 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { if (fallbackCopy(text)) done(); });
     } else if (fallbackCopy(text)) { done(); }
+  });
+
+  // 관람 플랜: 부스 데이터와 그림 그리기
+  // 출처: ISE 2027 공식 평면도(2026-11-22 조사). x, y는 홀 사각형 안 위치(서→동 %, 북→남 %).
+  // ratio는 화면용 가로세로 비율(Hall 3은 실제보다 넓게 그려 번호가 겹치지 않게 함).
+  // k: 핵심 업체, est: 위치 추정
+  var HALLS = {
+    "2": { ratio: 0.63, exits: { w: "SOUTH ACCESS 광장", s: "로비", e: "Hall 3" } },
+    "3": { ratio: 0.46, exits: { s: "EAST ACCESS", w: "Hall 2", e: "Congress Sq." } },
+    "4": { ratio: 0.53, exits: { n: "Congress Square", w: "Hall 3" } },
+    "5": { ratio: 0.56, exits: { s: "Congress Square", w: "Hall 3", e: "Hall 7" } },
+    "6": { ratio: 0.53, exits: { n: "Congress Square", e: "Hall 8.0" } },
+    "7": { ratio: 0.56, exits: { s: "Congress Square", w: "Hall 5" } },
+    "8.0": { ratio: 1.5, exits: { s: "NORTH ACCESS" } }
+  };
+  function B(n, s, h, x, y, k, est) { return { n: n, s: s, h: h, x: x, y: y, k: !!k, est: !!est }; }
+  var PLAN = [
+    { label: "화 2/2", title: "Hall 3 집중", start: "east",
+      note: "09:00 조기 입장(1·2·3홀)으로 시작합니다. EAST ACCESS로 들어가 남쪽 앞열부터 북쪽으로 지그재그로 올라갑니다.",
+      stops: [
+        B("Canon Europe", "3B500", "3", 64, 82), B("Analog Way", "3C800", "3", 80, 81), B("Sennheiser", "3C500", "3", 67, 76),
+        B("NovaStar", "3C100", "3", 17, 76, 1), B("Yamaha", "3F100", "3", 15, 61), B("Sony", "3E300", "3", 40, 66),
+        B("HARMAN", "3F300", "3", 35, 60), B("Samsung Electronics", "3F500", "3", 76, 58, 1), B("Panasonic Connect", "3J500", "3", 69, 44),
+        B("Epson Europe", "3J100", "3", 25, 44), B("Bose Professional", "3L100", "3", 22, 35), B("Shure", "3M300", "3", 33, 29, 1),
+        B("Vaddio (Legrand AV)", "3L500", "3", 62, 34), B("Inogeni", "3L990", "3", 93, 35, 1), B("Televic Conference", "3M900", "3", 87, 30),
+        B("Magnimage", "3Q820", "3", 81, 14), B("Audio-Technica", "3P300", "3", 44, 17), B("Colorlight", "3P150", "3", 26, 18, 1)
+      ] },
+    { label: "수 2/3", title: "Hall 2 → Hall 1", start: "south",
+      note: "09:00 조기 입장(Hall 2)으로 시작합니다. 남쪽 로비에서 동쪽 열을 따라 올라간 뒤 서쪽, 북쪽 순서로 돌고, 오후에는 Hall 1을 자유 관람합니다.",
+      stops: [
+        B("Cypress Technology (CYP)", "2D600", "2", 79, 83), B("HARMAN Luxury", "2F500", "2", 84, 69), B("Cisco", "2K500", "2", 83, 48, 1),
+        B("Q-SYS", "2L300", "2", 53, 44), B("Logitech", "2K100", "2", 23, 50), B("Dante by Audinate", "2N130", "2", 18, 39),
+        B("Yealink", "2S150", "2", 21, 18), B("Yealink", "2S200", "2", 27, 18, 0, 1), B("HP", "2S500", "2", 62, 18),
+        B("NETGEAR AV", "2T800", "2", 83, 17, 0, 1), B("Lightware", "2P500", "2", 77, 32), B("Jabra", "2N500", "2", 84, 37, 0, 1)
+      ], free: ["1"] },
+    { label: "목 2/4", title: "Hall 4 → 5 → 7 → 6 → 8.0", start: "east",
+      note: "Hall 4는 북쪽(Congress Square) 쪽 부스부터 보고, Hall 5와 7을 지나 Hall 6, 데모룸 순서로 이동합니다. 데모룸은 시연 시간을 미리 확인하세요.",
+      stops: [
+        B("AJA Video Systems", "4S220", "4", 19, 7), B("Epiphan Video", "4M600", "4", 59, 32), B("Roland", "4N700", "4", 88, 26),
+        B("Ross Video", "4Q500", "4", 66, 14), B("Blackmagic Design", "4R500", "4", 76, 5, 1),
+        B("ATEN", "5E350", "5", 41, 70), B("Neutrik EMEA", "5G500", "5", 58, 54), B("Opticis", "5H300", "5", 40, 46),
+        B("Colorlight (두 번째 부스)", "5N200", "5", 13, 19, 1),
+        B("MIPRO", "7K150", "7", 19, 21), B("Relacart", "7J150", "7", 19, 29), B("JTS", "7J420", "7", 41, 35),
+        B("Powersoft", "7F300", "7", 35, 53), B("Ecler", "7C300", "7", 39, 79), B("Martin Audio", "7A300", "7", 37, 96),
+        B("HARMAN", "6L100", "6", 14, 37),
+        B("Q-SYS 데모룸", "F2", "8.0", 75, 69), B("Martin Audio 데모룸", "F6", "8.0", 75, 90)
+      ] }
+  ];
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, text) {
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function rectOf(h) { var r = document.querySelector('#campus rect[data-hall="' + h + '"]');
+    return { x: +r.getAttribute("x"), y: +r.getAttribute("y"), w: +r.getAttribute("width"), h: +r.getAttribute("height") }; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function drawCampus(day) {
+    var g = document.getElementById("campus-route");
+    while (g.firstChild) g.removeChild(g.firstChild);
+    var order = [];
+    day.stops.forEach(function (b) { if (order.indexOf(b.h) < 0) order.push(b.h); });
+    (day.free || []).forEach(function (h) { if (order.indexOf(h) < 0) order.push(h); });
+    Array.prototype.forEach.call(document.querySelectorAll("#campus rect[data-hall]"), function (r) {
+      r.classList.toggle("on", order.indexOf(r.getAttribute("data-hall")) >= 0);
+    });
+    var pts = [day.start === "south" ? [66, 88] : [243, 308]];
+    order.forEach(function (h) { var r = rectOf(h); pts.push([r.x + r.w / 2, r.y + r.h / 2]); });
+    g.appendChild(el("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), "marker-end": "url(#arr)", "class": "hall-line" }));
+    order.forEach(function (h, i) { var r = rectOf(h), cx = r.x + r.w - 13, cy = r.y + 14;
+      var pin = el("g", { "class": "pin" }); pin.appendChild(el("circle", { cx: cx, cy: cy, r: 11 }));
+      pin.appendChild(el("text", { x: cx, y: cy + 4 }, String(i + 1))); g.appendChild(pin); });
+  }
+
+  // 홀 상세 그림: 위쪽이 북쪽. 부스 점은 평면도에서 읽은 실제 위치.
+  function hallMap(h, items) {
+    var info = HALLS[h], m = 34, IH = 460, IW = Math.round(IH * info.ratio);
+    if (info.ratio > 1) { IW = 560; IH = Math.round(IW / info.ratio); }
+    var W = IW + m * 2, H = IH + m * 2;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, "class": "hallmap", role: "img", "aria-label": "Hall " + h + " 부스 위치" });
+    svg.style.maxWidth = Math.round(W * 1.05) + "px";
+    svg.style.aspectRatio = W + " / " + H;
+    svg.appendChild(el("rect", { x: m, y: m, width: IW, height: IH, rx: 12, "class": "hm-bg" }));
+    var ex = info.exits;
+    if (ex.n) svg.appendChild(el("text", { x: W / 2, y: 22, "class": "hm-cap" }, "▲ " + ex.n));
+    if (ex.s) svg.appendChild(el("text", { x: W / 2, y: H - 10, "class": "hm-cap" }, "▼ " + ex.s));
+    if (ex.w) svg.appendChild(el("text", { x: 22, y: H / 2, "class": "hm-cap", transform: "rotate(-90 22 " + H / 2 + ")" }, ex.w + " 쪽"));
+    if (ex.e) svg.appendChild(el("text", { x: W - 14, y: H / 2, "class": "hm-cap", transform: "rotate(90 " + (W - 14) + " " + H / 2 + ")" }, ex.e + " 쪽"));
+    function pos(b) { return [m + b.x / 100 * IW, m + b.y / 100 * IH]; }
+    var pts = items.map(function (it) { return pos(it.b); });
+    if (pts.length > 1) svg.appendChild(el("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), "class": "hm-line" }));
+    items.forEach(function (it, k) { var p = pts[k];
+      var pin = el("g", { "class": "pin" + (it.b.k ? " key" : "") + (it.b.est ? " est" : "") });
+      pin.appendChild(el("circle", { cx: p[0], cy: p[1], r: 13 }));
+      pin.appendChild(el("text", { x: p[0], y: p[1] + 5 }, String(it.no))); svg.appendChild(pin); });
+    return svg;
+  }
+
+  function renderDay(idx) {
+    var day = PLAN[idx], body = document.getElementById("day-body");
+    drawCampus(day);
+    body.innerHTML = '<div class="day-head"><b>' + esc(day.label + " · " + day.title) + '</b></div><p class="day-note top">' + esc(day.note) + "</p>";
+    var groups = [], no = 0;
+    day.stops.forEach(function (b) { var g = groups[groups.length - 1];
+      if (!g || g.h !== b.h) { g = { h: b.h, items: [] }; groups.push(g); } g.items.push({ b: b, no: ++no }); });
+    groups.forEach(function (g) {
+      var wrap = document.createElement("div"); wrap.className = "hall-block";
+      var head = document.createElement("div"); head.className = "hall-title";
+      head.textContent = g.h === "8.0" ? "Hall 8.0 · 오디오 데모룸" : "Hall " + g.h; wrap.appendChild(head);
+      var inner = document.createElement("div"); inner.className = "hall-grid";
+      if (g.items.length > 1) { var fig = document.createElement("div"); fig.className = "hall-fig"; fig.appendChild(hallMap(g.h, g.items)); inner.appendChild(fig); }
+      var ol = document.createElement("ol"); ol.className = "stops";
+      g.items.forEach(function (it) {
+        var li = document.createElement("li");
+        li.innerHTML = '<span class="n' + (it.b.k ? "" : " soft") + '">' + it.no + '</span><span class="nm">' + esc(it.b.n) +
+          (it.b.k ? ' <em class="key-tag">핵심</em>' : "") + (it.b.est ? ' <em class="est-tag">위치 추정</em>' : "") +
+          '</span><span class="bt">' + esc(it.b.s) + "</span>";
+        ol.appendChild(li); });
+      inner.appendChild(ol); wrap.appendChild(inner); body.appendChild(wrap); });
+    (day.free || []).forEach(function (h) { var p = document.createElement("p"); p.className = "day-note";
+      p.textContent = "자유 관람: Hall " + h + " (조사한 브랜드 없음)"; body.appendChild(p); });
+  }
+  var dayBtns = document.querySelectorAll(".plan-seg button");
+  Array.prototype.forEach.call(dayBtns, function (b) {
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(dayBtns, function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      renderDay(+b.getAttribute("data-day"));
+    });
+  });
+  renderDay(0);
+  // 관람 플랜 잠금(간단한 비밀번호, 이 브라우저 창을 닫을 때까지 유지)
+  var lockBox = document.getElementById("plan-lock"), planCard = document.getElementById("plan-card");
+  function unlock() { lockBox.hidden = true; planCard.hidden = false; }
+  try { if (sessionStorage.getItem("ise27-plan") === "1") unlock(); } catch (e) {}
+  document.getElementById("plan-lock-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var pw = document.getElementById("plan-pw");
+    if (pw.value.trim() === "ise2027") {
+      try { sessionStorage.setItem("ise27-plan", "1"); } catch (err) {}
+      unlock();
+    } else {
+      document.getElementById("plan-msg").textContent = "비밀번호가 맞지 않습니다.";
+      pw.select();
+    }
   });
 
   // 아코디언
