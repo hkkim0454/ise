@@ -283,11 +283,15 @@
   .day-note.top { margin: 0 0 6px; }
   .hall-block { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--sep); }
   .hall-title { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-  .hallmap { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto 6px; }
+  .hallmap { display: block; width: 100%; height: auto; margin: 0 auto 6px; }
+  .hallmap .pin.est circle { stroke-dasharray: 3 3; }
+  .est-tag { font-style: normal; font-size: 11px; font-weight: 700; color: var(--sub); background: var(--fill); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
+  @media (min-width: 1024px) { .hall-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 24px; align-items: start; } }
+
   .hallmap .hm-bg { fill: var(--fill); stroke: var(--sep2); }
   .hallmap .hm-row { stroke: var(--sep); stroke-width: 1; }
   .hallmap .hm-lab { fill: var(--sub); font-size: 15px; font-weight: 700; text-anchor: middle; }
-  .hallmap .hm-cap { fill: var(--sub); font-size: 15px; font-weight: 700; text-anchor: middle; }
+  .hallmap .hm-cap { fill: var(--sub); font-size: 14px; font-weight: 700; text-anchor: middle; }
   .hallmap .hm-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 5 5; opacity: .7; }
   .hallmap .pin circle { fill: var(--seg); stroke: var(--accent); stroke-width: 2; }
   .hallmap .pin text { fill: var(--accent); font-size: 14px; font-weight: 700; text-anchor: middle; }
@@ -323,7 +327,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.22 23:09</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.22 23:25</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -441,7 +445,7 @@
 
   <section id="plan">
     <div class="sec-head"><span class="badge">6</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
-    <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 전시장 그림은 공식 평면도 캡처를 바탕으로 단순화했고(위쪽이 북쪽), 홀 안 위치는 부스 번호로 추정했습니다. 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
+    <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 모든 그림은 위쪽이 북쪽이며, 부스 위치는 공식 평면도에서 읽은 값입니다(점선 원은 위치 추정). 행사 직전에 부스가 바뀔 수 있으니 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
     <div class="glass plan-card">
       <div class="seg plan-seg" role="group" aria-label="관람일 선택">
         <button type="button" data-day="0" aria-pressed="true">화 2/2</button>
@@ -700,33 +704,52 @@
   });
 
   // 관람 플랜: 부스 데이터와 그림 그리기
-  // 부스 데이터 출처: ISE 2027 공식 평면도 검색 결과(2026-11-22 조사). key=true는 핵심 업체.
+  // 출처: ISE 2027 공식 평면도(2026-11-22 조사). x, y는 홀 사각형 안 위치(서→동 %, 북→남 %).
+  // ratio는 화면용 가로세로 비율(Hall 3은 실제보다 넓게 그려 번호가 겹치지 않게 함).
+  // k: 핵심 업체, est: 위치 추정
+  var HALLS = {
+    "2": { ratio: 0.63, exits: { w: "SOUTH ACCESS 광장", s: "로비", e: "Hall 3" } },
+    "3": { ratio: 0.46, exits: { s: "EAST ACCESS", w: "Hall 2", e: "Congress Sq." } },
+    "4": { ratio: 0.53, exits: { n: "Congress Square", w: "Hall 3" } },
+    "5": { ratio: 0.56, exits: { s: "Congress Square", w: "Hall 3", e: "Hall 7" } },
+    "6": { ratio: 0.53, exits: { n: "Congress Square", e: "Hall 8.0" } },
+    "7": { ratio: 0.56, exits: { s: "Congress Square", w: "Hall 5" } },
+    "8.0": { ratio: 1.5, exits: { s: "NORTH ACCESS" } }
+  };
+  function B(n, s, h, x, y, k, est) { return { n: n, s: s, h: h, x: x, y: y, k: !!k, est: !!est }; }
   var PLAN = [
-    { label: "화 2/2", title: "Hall 3 집중", note: "09:00 조기 입장(1·2·3홀)으로 시작해 입구(EAST ACCESS) 쪽 앞열부터 뒷열로 지그재그로 이동합니다.",
-      start: "east", stops: [
-        ["Canon", "3B500"], ["NovaStar", "3C100", 1], ["Sennheiser", "3C500"], ["Analog Way", "3C800"],
-        ["Sony", "3E300"], ["Samsung Electronics", "3F500", 1], ["HARMAN", "3F300"], ["Yamaha", "3F100"],
-        ["Epson", "3J100"], ["Panasonic", "3J500"], ["Inogeni", "3L990", 1], ["Vaddio", "3L500"],
-        ["Bose Professional", "3L100"], ["Shure", "3M300", 1], ["Televic", "3M900"], ["Magnimage", "3Q820"],
-        ["Audio-Technica", "3P300"], ["Colorlight", "3P150", 1]
+    { label: "화 2/2", title: "Hall 3 집중", start: "east",
+      note: "09:00 조기 입장(1·2·3홀)으로 시작합니다. EAST ACCESS로 들어가 남쪽 앞열부터 북쪽으로 지그재그로 올라갑니다.",
+      stops: [
+        B("Canon Europe", "3B500", "3", 64, 82), B("Analog Way", "3C800", "3", 80, 81), B("Sennheiser", "3C500", "3", 67, 76),
+        B("NovaStar", "3C100", "3", 17, 76, 1), B("Yamaha", "3F100", "3", 15, 61), B("Sony", "3E300", "3", 40, 66),
+        B("HARMAN", "3F300", "3", 35, 60), B("Samsung Electronics", "3F500", "3", 76, 58, 1), B("Panasonic Connect", "3J500", "3", 69, 44),
+        B("Epson Europe", "3J100", "3", 25, 44), B("Bose Professional", "3L100", "3", 22, 35), B("Shure", "3M300", "3", 33, 29, 1),
+        B("Vaddio (Legrand AV)", "3L500", "3", 62, 34), B("Inogeni", "3L990", "3", 93, 35, 1), B("Televic Conference", "3M900", "3", 87, 30),
+        B("Magnimage", "3Q820", "3", 81, 14), B("Audio-Technica", "3P300", "3", 44, 17), B("Colorlight", "3P150", "3", 26, 18, 1)
       ] },
-    { label: "수 2/3", title: "Hall 2 → Hall 1", note: "09:00 조기 입장(Hall 2)으로 시작합니다. 화상회의·교육 브랜드가 모여 있어 오후에는 Hall 1을 자유 관람합니다.",
-      start: "south", stops: [
-        ["Cypress Technology (CYP)", "2D600"], ["HARMAN Luxury", "2F500"], ["Logitech", "2K100"], ["Cisco", "2K500", 1],
-        ["Q-SYS", "2L300"], ["Dante by Audinate", "2N130"], ["Jabra", "2N500"], ["Lightware", "2P500"],
-        ["Yealink", "2S150"], ["Yealink", "2S200"], ["HP", "2S500"], ["NETGEAR AV", "2T800"]
+    { label: "수 2/3", title: "Hall 2 → Hall 1", start: "south",
+      note: "09:00 조기 입장(Hall 2)으로 시작합니다. 남쪽 로비에서 동쪽 열을 따라 올라간 뒤 서쪽, 북쪽 순서로 돌고, 오후에는 Hall 1을 자유 관람합니다.",
+      stops: [
+        B("Cypress Technology (CYP)", "2D600", "2", 79, 83), B("HARMAN Luxury", "2F500", "2", 84, 69), B("Cisco", "2K500", "2", 83, 48, 1),
+        B("Q-SYS", "2L300", "2", 53, 44), B("Logitech", "2K100", "2", 23, 50), B("Dante by Audinate", "2N130", "2", 18, 39),
+        B("Yealink", "2S150", "2", 21, 18), B("Yealink", "2S200", "2", 27, 18, 0, 1), B("HP", "2S500", "2", 62, 18),
+        B("NETGEAR AV", "2T800", "2", 83, 17, 0, 1), B("Lightware", "2P500", "2", 77, 32), B("Jabra", "2N500", "2", 84, 37, 0, 1)
       ], free: ["1"] },
-    { label: "목 2/4", title: "Hall 4 → 5 → 7 → 6 → 8.0", note: "사이니지·방송(Hall 4)부터 오디오(Hall 7)와 데모룸까지 이어서 돕니다. 데모룸은 시연 시간을 미리 확인하세요.",
-      start: "east", stops: [
-        ["Epiphan Video", "4M600"], ["Roland", "4N700"], ["Ross Video", "4Q500"], ["Blackmagic Design", "4R500", 1], ["AJA Video Systems", "4S220"],
-        ["ATEN", "5E350"], ["Neutrik", "5G500"], ["Opticis", "5H300"], ["Colorlight (두 번째 부스)", "5N200", 1],
-        ["Martin Audio", "7A300"], ["Ecler", "7C300"], ["Powersoft", "7F300"], ["Relacart", "7J150"], ["JTS", "7J420"], ["MIPRO", "7K150"],
-        ["HARMAN", "6L100"],
-        ["Q-SYS 데모룸", "F2", 0, "8.0"], ["Martin Audio 데모룸", "F6", 0, "8.0"]
+    { label: "목 2/4", title: "Hall 4 → 5 → 7 → 6 → 8.0", start: "east",
+      note: "Hall 4는 북쪽(Congress Square) 쪽 부스부터 보고, Hall 5와 7을 지나 Hall 6, 데모룸 순서로 이동합니다. 데모룸은 시연 시간을 미리 확인하세요.",
+      stops: [
+        B("AJA Video Systems", "4S220", "4", 19, 7), B("Epiphan Video", "4M600", "4", 59, 32), B("Roland", "4N700", "4", 88, 26),
+        B("Ross Video", "4Q500", "4", 66, 14), B("Blackmagic Design", "4R500", "4", 76, 5, 1),
+        B("ATEN", "5E350", "5", 41, 70), B("Neutrik EMEA", "5G500", "5", 58, 54), B("Opticis", "5H300", "5", 40, 46),
+        B("Colorlight (두 번째 부스)", "5N200", "5", 13, 19, 1),
+        B("MIPRO", "7K150", "7", 19, 21), B("Relacart", "7J150", "7", 19, 29), B("JTS", "7J420", "7", 41, 35),
+        B("Powersoft", "7F300", "7", 35, 53), B("Ecler", "7C300", "7", 39, 79), B("Martin Audio", "7A300", "7", 37, 96),
+        B("HARMAN", "6L100", "6", 14, 37),
+        B("Q-SYS 데모룸", "F2", "8.0", 75, 69), B("Martin Audio 데모룸", "F6", "8.0", 75, 90)
       ] }
   ];
   var SVGNS = "http://www.w3.org/2000/svg";
-  function hallOf(st) { return st[3] || st[1].charAt(0); }
   function el(tag, attrs, text) {
     var e = document.createElementNS(SVGNS, tag);
     for (var k in attrs) e.setAttribute(k, attrs[k]);
@@ -741,66 +764,64 @@
     var g = document.getElementById("campus-route");
     while (g.firstChild) g.removeChild(g.firstChild);
     var order = [];
-    day.stops.forEach(function (st) { var h = hallOf(st); if (order.indexOf(h) < 0) order.push(h); });
+    day.stops.forEach(function (b) { if (order.indexOf(b.h) < 0) order.push(b.h); });
     (day.free || []).forEach(function (h) { if (order.indexOf(h) < 0) order.push(h); });
     Array.prototype.forEach.call(document.querySelectorAll("#campus rect[data-hall]"), function (r) {
       r.classList.toggle("on", order.indexOf(r.getAttribute("data-hall")) >= 0);
     });
     var pts = [day.start === "south" ? [66, 36] : [220, 306]];
-    order.forEach(function (h) { var r = rectOf(h); pts.push([r.x + r.w / 2, r.y + r.h / 2 - (h === "3" ? 40 : 0)]); });
+    order.forEach(function (h) { var r = rectOf(h); pts.push([r.x + r.w / 2, r.y + r.h / 2]); });
     g.appendChild(el("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), "marker-end": "url(#arr)", "class": "hall-line" }));
     order.forEach(function (h, i) { var r = rectOf(h), cx = r.x + r.w - 13, cy = r.y + 14;
       var pin = el("g", { "class": "pin" }); pin.appendChild(el("circle", { cx: cx, cy: cy, r: 11 }));
       pin.appendChild(el("text", { x: cx, y: cy + 4 }, String(i + 1))); g.appendChild(pin); });
   }
 
-  // 홀 상세 그림: 열(알파벳)은 세로, 부스 번호는 가로. Hall 3은 아래쪽이 입구(EAST ACCESS).
+  // 홀 상세 그림: 위쪽이 북쪽. 부스 점은 평면도에서 읽은 실제 위치.
   function hallMap(h, items) {
-    var W = 600, padL = 40, padR = 22, rowH = 36;
-    var letters = items.map(function (it) { return it.st[1].charAt(1); });
-    var lo = letters.reduce(function (a, b) { return a < b ? a : b; }), hi = letters.reduce(function (a, b) { return a > b ? a : b; });
-    var rows = []; for (var c = lo.charCodeAt(0); c <= hi.charCodeAt(0); c++) rows.push(String.fromCharCode(c));
-    var flip = h === "3";
-    if (flip) rows.reverse();
-    var H = rows.length * rowH + 40;
-    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, "class": "hallmap", role: "img", "aria-label": "Hall " + h + " 부스 위치(추정)" });
-    svg.appendChild(el("rect", { x: 1, y: 1, width: W - 2, height: H - 2, rx: 14, "class": "hm-bg" }));
-    rows.forEach(function (L, i) { var y = 15 + i * rowH + rowH / 2;
-      svg.appendChild(el("line", { x1: padL, x2: W - padR, y1: y, y2: y, "class": "hm-row" }));
-      svg.appendChild(el("text", { x: 20, y: y + 5, "class": "hm-lab" }, L)); });
-    function pos(st) { var L = st[1].charAt(1), num = parseInt(st[1].slice(2), 10) || 500;
-      var i = rows.indexOf(L); var x = padL + 12 + (Math.min(Math.max(num, 100), 1000) - 100) / 900 * (W - padL - padR - 24);
-      return [x, 15 + i * rowH + rowH / 2]; }
-    var pts = items.map(function (it) { return pos(it.st); });
+    var info = HALLS[h], m = 34, IH = 460, IW = Math.round(IH * info.ratio);
+    if (info.ratio > 1) { IW = 560; IH = Math.round(IW / info.ratio); }
+    var W = IW + m * 2, H = IH + m * 2;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, "class": "hallmap", role: "img", "aria-label": "Hall " + h + " 부스 위치" });
+    svg.style.maxWidth = Math.round(W * 1.05) + "px";
+    svg.style.aspectRatio = W + " / " + H;
+    svg.appendChild(el("rect", { x: m, y: m, width: IW, height: IH, rx: 12, "class": "hm-bg" }));
+    var ex = info.exits;
+    if (ex.n) svg.appendChild(el("text", { x: W / 2, y: 22, "class": "hm-cap" }, "▲ " + ex.n));
+    if (ex.s) svg.appendChild(el("text", { x: W / 2, y: H - 10, "class": "hm-cap" }, "▼ " + ex.s));
+    if (ex.w) svg.appendChild(el("text", { x: 22, y: H / 2, "class": "hm-cap", transform: "rotate(-90 22 " + H / 2 + ")" }, ex.w + " 쪽"));
+    if (ex.e) svg.appendChild(el("text", { x: W - 14, y: H / 2, "class": "hm-cap", transform: "rotate(90 " + (W - 14) + " " + H / 2 + ")" }, ex.e + " 쪽"));
+    function pos(b) { return [m + b.x / 100 * IW, m + b.y / 100 * IH]; }
+    var pts = items.map(function (it) { return pos(it.b); });
     if (pts.length > 1) svg.appendChild(el("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), "class": "hm-line" }));
     items.forEach(function (it, k) { var p = pts[k];
-      var pin = el("g", { "class": "pin" + (it.st[2] ? " key" : "") });
-      pin.appendChild(el("circle", { cx: p[0], cy: p[1], r: 14 }));
+      var pin = el("g", { "class": "pin" + (it.b.k ? " key" : "") + (it.b.est ? " est" : "") });
+      pin.appendChild(el("circle", { cx: p[0], cy: p[1], r: 13 }));
       pin.appendChild(el("text", { x: p[0], y: p[1] + 5 }, String(it.no))); svg.appendChild(pin); });
-    if (flip) svg.appendChild(el("text", { x: W / 2, y: H - 6, "class": "hm-cap" }, "▼ EAST ACCESS (입구) 쪽"));
     return svg;
   }
 
   function renderDay(idx) {
     var day = PLAN[idx], body = document.getElementById("day-body");
     drawCampus(day);
-    var html = '<div class="day-head"><b>' + esc(day.label + " · " + day.title) + '</b></div><p class="day-note top">' + esc(day.note) + "</p>";
-    body.innerHTML = html;
+    body.innerHTML = '<div class="day-head"><b>' + esc(day.label + " · " + day.title) + '</b></div><p class="day-note top">' + esc(day.note) + "</p>";
     var groups = [], no = 0;
-    day.stops.forEach(function (st) { var h = hallOf(st); var g = groups[groups.length - 1];
-      if (!g || g.h !== h) { g = { h: h, items: [] }; groups.push(g); } g.items.push({ st: st, no: ++no }); });
+    day.stops.forEach(function (b) { var g = groups[groups.length - 1];
+      if (!g || g.h !== b.h) { g = { h: b.h, items: [] }; groups.push(g); } g.items.push({ b: b, no: ++no }); });
     groups.forEach(function (g) {
       var wrap = document.createElement("div"); wrap.className = "hall-block";
       var head = document.createElement("div"); head.className = "hall-title";
       head.textContent = g.h === "8.0" ? "Hall 8.0 · 오디오 데모룸" : "Hall " + g.h; wrap.appendChild(head);
-      if (g.h !== "8.0" && g.items.length > 1) wrap.appendChild(hallMap(g.h, g.items));
+      var inner = document.createElement("div"); inner.className = "hall-grid";
+      if (g.items.length > 1) { var fig = document.createElement("div"); fig.className = "hall-fig"; fig.appendChild(hallMap(g.h, g.items)); inner.appendChild(fig); }
       var ol = document.createElement("ol"); ol.className = "stops";
       g.items.forEach(function (it) {
         var li = document.createElement("li");
-        li.innerHTML = '<span class="n' + (it.st[2] ? "" : " soft") + '">' + it.no + '</span><span class="nm">' + esc(it.st[0]) +
-          (it.st[2] ? ' <em class="key-tag">핵심</em>' : "") + '</span><span class="bt">' + esc(it.st[1]) + "</span>";
+        li.innerHTML = '<span class="n' + (it.b.k ? "" : " soft") + '">' + it.no + '</span><span class="nm">' + esc(it.b.n) +
+          (it.b.k ? ' <em class="key-tag">핵심</em>' : "") + (it.b.est ? ' <em class="est-tag">위치 추정</em>' : "") +
+          '</span><span class="bt">' + esc(it.b.s) + "</span>";
         ol.appendChild(li); });
-      wrap.appendChild(ol); body.appendChild(wrap); });
+      inner.appendChild(ol); wrap.appendChild(inner); body.appendChild(wrap); });
     (day.free || []).forEach(function (h) { var p = document.createElement("p"); p.className = "day-note";
       p.textContent = "자유 관람: Hall " + h + " (조사한 브랜드 없음)"; body.appendChild(p); });
   }
