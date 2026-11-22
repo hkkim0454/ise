@@ -299,7 +299,6 @@
   .hallmap .pin.key text { fill: #fff; }
   .key-tag { font-style: normal; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
   .stops li { padding: 9px 0; font-size: 15px; }
-  .plan-ref { margin-top: 18px; width: auto; margin-left: 14px; margin-right: 14px; }
   .plan-lock { display: flex; flex-direction: column; gap: 12px; }
   .lock-row { display: flex; gap: 8px; }
   .lock-row input { flex: 1; min-width: 0; height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--sep2); background: var(--fill); color: var(--ink); font: inherit; font-size: 16px; }
@@ -334,7 +333,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.22 23:42</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.23 07:15</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -453,6 +452,7 @@
   <section id="plan">
     <div class="sec-head"><span class="badge">6</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
     <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 모든 그림은 위쪽이 북쪽이며, 부스 위치는 공식 평면도에서 읽은 값입니다(점선 원은 위치 추정). 행사 직전에 부스가 바뀔 수 있으니 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
+    <a class="btn-primary plan-ref" href="https://ise2027.mapyourshow.com/8_0/floorplan/index.cfm?hallID=OO&amp;level=0" target="_blank" rel="noopener">ISE 공식 평면도 열기 ↗</a>
     <div class="glass plan-lock" id="plan-lock">
       <p class="body16">관람 플랜은 아직 준비 중입니다. 비밀번호를 넣으면 볼 수 있습니다.</p>
       <form class="lock-row" id="plan-lock-form" autocomplete="off">
@@ -493,7 +493,6 @@
       </svg>
 
       <div id="day-body"></div>
-      <a class="btn-primary plan-ref" href="https://ise2027.mapyourshow.com/8_0/floorplan/index.cfm?hallID=OO&amp;level=0" target="_blank" rel="noopener">ISE 공식 평면도 열기 ↗</a>
     </div>
   </section>
 
