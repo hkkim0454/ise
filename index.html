@@ -299,6 +299,21 @@
   .hallmap .pin.key text { fill: #fff; }
   .key-tag { font-style: normal; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
   .stops li { padding: 9px 0; font-size: 15px; }
+  /* 주간 일정표 */
+  .week { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+  .wday { padding: 16px 18px; border-radius: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .wd-top { display: flex; align-items: baseline; gap: 8px; }
+  .wd-date { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .wd-dow { font-size: 15px; font-weight: 700; color: var(--sub); }
+  .wd-tag { margin-left: auto; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--fill); color: var(--sub); }
+  .wday.expo .wd-tag { background: var(--accent); color: #fff; }
+  .wday.expo .wd-date { color: var(--accent); }
+  .wday.travel .wd-tag { background: color-mix(in oklch, var(--accent) 14%, transparent); color: var(--accent); }
+  .wd-title { font-size: 17px; font-weight: 700; line-height: 1.35; }
+  .wd-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; }
+  .wd-list .num { font-weight: 700; }
+  .wd-tip { margin: 2px 0 0; padding: 10px 12px; border-radius: 14px; background: var(--fill); font-size: 13px; line-height: 1.55; color: var(--sub); }
+  .wd-link { align-self: flex-start; margin-top: auto; border: 0; background: none; padding: 4px 0 0; color: var(--accent); font-size: 14px; font-weight: 700; cursor: pointer; }
   /* PC 타일 배치: 모바일에서는 묶음 상자가 없는 것처럼 동작 */
   .duo, .col { display: contents; }
   #s9 { order: 1; }
@@ -327,7 +342,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.23 07:16</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.23 09:39</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -344,8 +359,76 @@
     </div>
   </header>
 
+  <section id="week">
+    <div class="sec-head"><span class="badge">1</span><h2>주간 일정표</h2></div>
+    <div class="week">
+      <div class="glass wday travel">
+        <div class="wd-top"><span class="wd-date num">1/31</span><span class="wd-dow">일</span><span class="wd-tag">출국</span></div>
+        <b class="wd-title">바르셀로나 도착</b>
+        <ul class="wd-list">
+          <li><span class="num">12:00</span> 인천 출발 (OZ511)</li>
+          <li><span class="num">18:55</span> 바르셀로나 도착</li>
+          <li>숙소 이동, 체크인</li>
+        </ul>
+      </div>
+      <div class="glass wday free">
+        <div class="wd-top"><span class="wd-date num">2/1</span><span class="wd-dow">월</span><span class="wd-tag">휴식</span></div>
+        <b class="wd-title">휴식 · 관광</b>
+        <ul class="wd-list">
+          <li>자유 일정 (시차 적응, 시내 관광)</li>
+        </ul>
+        <p class="wd-tip">ISE 무료 교통권을 받기 전이라 대중교통은 별도 승차권이 필요합니다.</p>
+      </div>
+      <div class="glass wday expo">
+        <div class="wd-top"><span class="wd-date num">2/2</span><span class="wd-dow">화</span><span class="wd-tag">ISE 1일차</span></div>
+        <b class="wd-title">Hall 3 집중</b>
+        <ul class="wd-list">
+          <li>09:00 조기 입장 홀부터 시작</li>
+          <li>NovaStar, Samsung, Shure 등 18곳</li>
+        </ul>
+        <p class="wd-tip">입구 안내 데스크에서 무료 교통권 수령(배지 필요). 저녁에 전시장을 나설 때 처음 사용하면 금요일까지 쓰기 좋습니다.</p>
+        <button type="button" class="wd-link" data-goday="0">관람 플랜 보기 ›</button>
+      </div>
+      <div class="glass wday expo">
+        <div class="wd-top"><span class="wd-date num">2/3</span><span class="wd-dow">수</span><span class="wd-tag">ISE 2일차</span></div>
+        <b class="wd-title">Hall 2 → Hall 1</b>
+        <ul class="wd-list">
+          <li>Cisco, Logitech, Yealink 등 12곳</li>
+          <li>오후 Hall 1 자유 관람</li>
+        </ul>
+        <p class="wd-tip">Spark · EdTech(몬주익 전시장)는 2/3~4에 열립니다.</p>
+        <button type="button" class="wd-link" data-goday="1">관람 플랜 보기 ›</button>
+      </div>
+      <div class="glass wday expo">
+        <div class="wd-top"><span class="wd-date num">2/4</span><span class="wd-dow">목</span><span class="wd-tag">ISE 3일차</span></div>
+        <b class="wd-title">Hall 4 → 5 → 7 → 6 → 8.0</b>
+        <ul class="wd-list">
+          <li>Blackmagic Design, Colorlight 등 18곳</li>
+          <li>오디오 데모룸 시연 시간 확인</li>
+        </ul>
+        <button type="button" class="wd-link" data-goday="2">관람 플랜 보기 ›</button>
+      </div>
+      <div class="glass wday travel">
+        <div class="wd-top"><span class="wd-date num">2/5</span><span class="wd-dow">금</span><span class="wd-tag">귀국</span></div>
+        <b class="wd-title">관광 · 쇼핑 후 출발</b>
+        <ul class="wd-list">
+          <li>오전 관광 또는 쇼핑</li>
+          <li><span class="num">20:40</span> 바르셀로나 출발 (KE916)</li>
+        </ul>
+        <p class="wd-tip">체크아웃 시간과 짐 보관 가능 여부를 미리 확인하세요.</p>
+      </div>
+      <div class="glass wday travel">
+        <div class="wd-top"><span class="wd-date num">2/6</span><span class="wd-dow">토</span><span class="wd-tag">도착</span></div>
+        <b class="wd-title">인천 도착</b>
+        <ul class="wd-list">
+          <li><span class="num">17:00</span> 인천 도착</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section id="s1">
-    <div class="sec-head"><span class="badge">1</span><h2>항공권 구매 완료</h2></div>
+    <div class="sec-head"><span class="badge">2</span><h2>항공권 구매 완료</h2></div>
     <div class="flights">
       <div class="glass flight">
         <div class="f-top"><span class="f-date">출국 · 2027.01.31(일)</span><span class="f-no">OZ511</span></div>
@@ -370,7 +453,7 @@
 
   <div class="duo duo-a">
   <section id="s2">
-    <div class="sec-head"><span class="badge">2</span><h2>좌석 안내</h2></div>
+    <div class="sec-head"><span class="badge">3</span><h2>좌석 안내</h2></div>
     <div class="glass seat-card">
       <div class="seg" role="group" aria-label="출국 귀국 선택">
         <button type="button" id="seg-out" aria-pressed="true">출국 · OZ511</button>
@@ -407,7 +490,7 @@
     <div class="col">
 
   <section id="s3">
-    <div class="sec-head"><span class="badge">3</span><h2>숙소 위치</h2></div>
+    <div class="sec-head"><span class="badge">4</span><h2>숙소 위치</h2></div>
     <div class="glass stack">
       <span class="addr-area">Eixample · Barcelona</span>
       <p class="addr">Carrer de Trafalgar, 15, 4º 1a, Eixample, 08010 Barcelona, Spain</p>
@@ -417,7 +500,7 @@
   </section>
 
   <section id="s4">
-    <div class="sec-head"><span class="badge">4</span><h2>ISE 입장 등록 (무료 티켓)</h2></div>
+    <div class="sec-head"><span class="badge">5</span><h2>ISE 입장 등록 (무료 티켓)</h2></div>
     <div class="glass stack">
       <p class="body16">아래 링크에 접속하여 등록해 주시기 바랍니다.</p>
       <div class="code-box">
@@ -430,7 +513,7 @@
 
 
   <section id="s6">
-    <div class="sec-head"><span class="badge">5</span><h2>바르셀로나 도시관광세 · 여권 사본</h2></div>
+    <div class="sec-head"><span class="badge">6</span><h2>바르셀로나 도시관광세 · 여권 사본</h2></div>
     <div class="glass tax stack">
       <div class="tax-top">
         <div><span class="tax-label">1인당 총액 (5박 기준, 약 8만 원)</span><span class="tax-amt num">€52.25</span></div>
@@ -444,7 +527,7 @@
   </div>
 
   <section id="plan">
-    <div class="sec-head"><span class="badge">6</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
+    <div class="sec-head"><span class="badge">7</span><h2>ISE 관람 플랜 (화·수·목)</h2></div>
     <p class="sec-note">주요 거래 브랜드 47곳의 부스를 홀 단위로 묶은 동선입니다. 모든 그림은 위쪽이 북쪽이며, 부스 위치는 공식 평면도에서 읽은 값입니다(점선 원은 위치 추정). 행사 직전에 부스가 바뀔 수 있으니 출발 전에 공식 평면도와 다시 대조해 주세요.</p>
     <a class="btn-primary plan-ref" href="https://ise2027.mapyourshow.com/8_0/floorplan/index.cfm?hallID=OO&amp;level=0" target="_blank" rel="noopener">ISE 공식 평면도 열기 ↗</a>
     <div class="glass plan-card" id="plan-card">
@@ -485,7 +568,7 @@
   <div class="duo duo-b">
     <div class="col">
   <section id="s7">
-    <div class="sec-head"><span class="badge">7</span><h2>ISE 방문객 혜택</h2></div>
+    <div class="sec-head"><span class="badge">8</span><h2>ISE 방문객 혜택</h2></div>
     <p class="sec-note">ISE 2027 공식 사이트 기준 정리입니다.</p>
     <div class="glass acc-card">
 
@@ -572,7 +655,7 @@
   </section>
 
   <section id="s9">
-    <div class="sec-head"><span class="badge">9</span><h2>맛집 · 마트 정보</h2></div>
+    <div class="sec-head"><span class="badge">10</span><h2>맛집 · 마트 정보</h2></div>
     <div class="glass stack">
       <p class="body16">예전에 조사해 둔 식당, 조식 카페, 마트 목록입니다. 아래 버튼을 누르면 정리된 시트가 열립니다.</p>
       <a class="btn-primary" href="https://docs.google.com/spreadsheets/d/1EPRS0VilmaA5YN7fO8BL1LG3VoPO5Bql/edit?usp=sharing&amp;ouid=102212323522439915159&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">맛집 · 마트 목록 보기</a>
@@ -580,7 +663,7 @@
   </section>
     </div>
   <section id="s8">
-    <div class="sec-head"><span class="badge">8</span><h2>주의 사항</h2></div>
+    <div class="sec-head"><span class="badge">9</span><h2>주의 사항</h2></div>
 
     <div class="glass">
       <div class="ck-head"><h3>개인 준비물</h3><span class="ck-count num" id="ck-count">0 / 0</span></div>
@@ -642,7 +725,8 @@
 </main>
 
 <nav class="tabbar" aria-label="섹션 바로가기">
-  <button type="button" data-target="s1" class="on">항공</button>
+  <button type="button" data-target="week" class="on">일정</button>
+  <button type="button" data-target="s1">항공</button>
   <button type="button" data-target="s3">숙소</button>
   <button type="button" data-target="s4">등록</button>
   <button type="button" data-target="plan">플랜</button>
@@ -834,6 +918,16 @@
   });
   renderDay(0);
 
+  // 주간 일정표의 "관람 플랜 보기": 해당 요일로 바꾸고 플랜으로 이동
+  Array.prototype.forEach.call(document.querySelectorAll(".wd-link"), function (btn) {
+    btn.addEventListener("click", function () {
+      var seg = document.querySelector('.plan-seg button[data-day="' + btn.getAttribute("data-goday") + '"]');
+      if (seg) seg.click();
+      var el = document.getElementById("plan");
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 20, behavior: "smooth" });
+    });
+  });
+
   // 아코디언
   Array.prototype.forEach.call(document.querySelectorAll(".acc-btn"), function (btn) {
     btn.addEventListener("click", function () {
@@ -879,7 +973,7 @@
     });
   });
   function onScroll() {
-    var active = "s1";
+    var active = "week";
     Array.prototype.forEach.call(tabs, function (t) {
       var id = t.getAttribute("data-target");
       if (document.getElementById(id).getBoundingClientRect().top < 240) active = id;
