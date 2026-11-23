@@ -300,6 +300,11 @@
   .key-tag { font-style: normal; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 1px 6px; border-radius: 6px; margin-left: 4px; vertical-align: 2px; }
   .stops li { padding: 9px 0; font-size: 15px; }
   /* 주간 일정표 */
+  .week-head { flex-wrap: wrap; row-gap: 6px; }
+  .hours { margin-left: auto; text-align: right; font-size: 12px; line-height: 1.5; color: var(--sub); font-variant-numeric: tabular-nums; }
+  .hours b { font-weight: 700; color: var(--ink); margin-right: 4px; }
+  .hours small { font-size: 11px; }
+  @media (max-width: 560px) { .hours { margin-left: 36px; text-align: left; } }
   .week { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 12px; }
   .wday { padding: 16px 18px; border-radius: 22px; display: flex; flex-direction: column; gap: 8px; }
   .wd-top { display: flex; align-items: baseline; gap: 8px; }
@@ -346,7 +351,7 @@
   <header>
     <div class="chips">
       <span class="chip">출장 안내</span>
-      <span class="chip num" id="updated">최종 수정 2026.11.23 10:19</span>
+      <span class="chip num" id="updated">최종 수정 2026.11.23 10:20</span>
     </div>
     <h1>ISE 2027 바르셀로나 출장 안내</h1>
     <p class="lead">항공권 구매와 참가 준비 사항을 아래와 같이 안내드립니다.</p>
@@ -364,7 +369,9 @@
   </header>
 
   <section id="week">
-    <div class="sec-head"><span class="badge">1</span><h2>주간 일정표</h2></div>
+    <div class="sec-head week-head"><span class="badge">1</span><h2>주간 일정표</h2>
+      <span class="hours"><b>ISE 운영 시간</b> 화–목 10:00–18:00 · 금 10:00–16:00<br><small>1·2·3홀, 8.0홀(오디오 데모룸)은 매일 09:00 조기 입장</small></span>
+    </div>
     <div class="week">
       <div class="glass wday travel">
         <div class="wd-top"><span class="wd-date num">1/31</span><span class="wd-dow">일</span><span class="wd-tag">출국</span></div>
